@@ -34,8 +34,8 @@ for l in claims:
     r, c, w, h, id = l
     intact = True
 
-    for r in range(l[0], l[0] + l[3]):
-        for c in range(l[1], l[1] + l[2]):
+    for r in range(r, r + h):
+        for c in range(c, c + w):
             # check
             intact = intact and fabric[(r, c)] == 1
             if not intact:
