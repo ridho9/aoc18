@@ -1,15 +1,11 @@
-proc react*(polymer: string): string =
-  var c1, c2: char
-  var polymer = polymer
-  var idx = 0
-  while idx < polymer.len - 1:
-    c1 = polymer[idx]
-    c2 = polymer[idx + 1]
+proc react*(polymer: string): int =
+  var stack = newSeq[char](0)
+  stack.add(polymer[0])
 
-    if (ord(c1) xor ord(c2)) == 32:
-      polymer = polymer[0 ..< idx] & polymer[idx+2 ..< polymer.len]
-      if idx > 0:
-        idx -= 1
+  for c in polymer[1..<polymer.len]:
+    if (ord(stack[^1]) xor ord(c)) == 32:
+      discard stack.pop()
     else:
-      idx += 1
-  result = polymer
+      stack.add(c)
+
+  result = stack.len
