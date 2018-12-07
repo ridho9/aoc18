@@ -24,16 +24,16 @@ def man_dist(p1, p2):
     return abs(p1[0] - p2[0]) + abs(p1[1] - p2[1])
 
 
-for x in range(xs[0] - x_span // 2, xs[-1] + x_span // 2):
-    for y in range(ys[0] - y_span // 2, ys[-1] + y_span // 2):
-        for i, p in enumerate(points):
-            count[(x, y)] += man_dist([x, y], p)
-
 res = 0
 
-for p, c in count.items():
-    if c < 10000:
-        res += 1
+for x in range(xs[0] - x_span // 2, xs[-1] + x_span // 2):
+    for y in range(ys[0] - y_span // 2, ys[-1] + y_span // 2):
+        cur_p = (x, y)
+        for i, p in enumerate(points):
+            count[cur_p] += man_dist(cur_p, p)
+        if count[cur_p] < 10000:
+            res += 1
+
 
 print(res)
 
